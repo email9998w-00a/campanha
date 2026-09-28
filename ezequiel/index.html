@@ -1,12 +1,12 @@
 <!doctype html>
-<!-- Arquivo único: estilos e JavaScript estão incorporados neste index.html. -->
+<!-- Arquivo único: CSS e JavaScript incorporados. -->
 <html lang="pt-BR">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#f8f6f1" />
-    <meta name="description" content="Contribua via PIX. Copie a chave e confira o nome do recebedor no aplicativo do seu banco antes de confirmar." />
-    <title>Contribua via PIX | Campanha de apoio</title>
+    <meta name="theme-color" content="#f4f1ea" />
+    <meta name="description" content="Copie a chave PIX e conclua a doação no aplicativo do seu banco." />
+    <title>Ajude essa causa</title>
     <style>
 :root {
   color-scheme: light;
@@ -15,18 +15,12 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --canvas: #f8f6f1;
-  --paper: #fff;
-  --ink: #252823;
-  --muted: #62665f;
-  --red: #a83c32;
-  --red-dark: #812f29;
-  --red-wash: #f4e9e4;
+  --canvas: #f4f1ea;
+  --header-red: #a83c32;
   --green: #17824d;
   --green-hover: #126a3f;
-  --line: #e9e6df;
-  --gold: #d7a947;
-  --shadow: 0 20px 60px rgb(41 38 30 / 10%), 0 3px 12px rgb(41 38 30 / 5%);
+  --ink: #252823;
+  --muted: #62665f;
 }
 
 * {
@@ -35,1099 +29,264 @@
 
 html {
   min-width: 320px;
-  scroll-behavior: smooth;
-  scroll-padding-top: 24px;
+  min-height: 100%;
   background: var(--canvas);
 }
 
 body {
   min-width: 320px;
+  min-height: 100vh;
+  min-height: 100svh;
   margin: 0;
   background: var(--canvas);
   color: var(--ink);
-  font-size: 16px;
-  line-height: 1.55;
-}
-
-button,
-a {
-  font: inherit;
 }
 
 button {
-  color: inherit;
+  font: inherit;
 }
 
-a {
-  color: inherit;
-}
-
-svg {
-  display: block;
-}
-
-.container {
-  width: min(100% - 48px, 1160px);
-  margin-inline: auto;
-}
-
-.skip-link {
-  position: fixed;
-  z-index: 10;
-  top: 12px;
-  left: 12px;
-  padding: 10px 14px;
-  transform: translateY(-160%);
-  border-radius: 8px;
-  background: #fff;
-  color: var(--ink);
-  box-shadow: var(--shadow);
-}
-
-.skip-link:focus {
-  transform: translateY(0);
-}
-
-.site-header {
-  border-bottom: 1px solid rgb(37 40 35 / 7%);
-  background: rgb(248 246 241 / 94%);
-}
-
-.header-inner {
-  display: flex;
-  min-height: 82px;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-}
-
-.brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
-}
-
-.brand img {
-  display: block;
-  width: 44px;
-  height: 44px;
-  border-radius: 13px;
-}
-
-.brand-copy {
+.page-shell {
   display: grid;
-  gap: 1px;
-}
-
-.brand-copy strong {
-  color: var(--red-dark);
-  font-size: 12px;
-  font-weight: 850;
-  letter-spacing: 1.2px;
-  line-height: 1.3;
-}
-
-.brand-copy span {
-  color: var(--muted);
-  font-size: 11px;
-  line-height: 1.3;
-}
-
-.header-cta {
-  display: inline-flex;
-  min-height: 43px;
-  align-items: center;
-  justify-content: center;
-  gap: 9px;
-  padding: 0 17px;
-  border: 1px solid #d7e4d9;
-  border-radius: 999px;
-  background: #fff;
-  color: #176a40;
-  font-size: 13px;
-  font-weight: 750;
-  text-decoration: none;
-  transition: border-color 140ms ease, background-color 140ms ease, transform 140ms ease;
-}
-
-.header-cta:hover {
-  transform: translateY(-1px);
-  border-color: #a8cbb3;
-  background: #f3faf5;
-}
-
-.header-cta svg,
-.button-primary > svg {
-  width: 18px;
-  height: 18px;
-}
-
-.hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1.06fr) minmax(360px, 0.84fr);
-  align-items: center;
-  gap: clamp(44px, 7vw, 92px);
-  padding-block: clamp(58px, 8vw, 102px) clamp(70px, 8vw, 104px);
-}
-
-.hero-copy {
-  max-width: 585px;
-  padding-bottom: 8px;
-}
-
-.eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  margin: 0 0 19px;
-  color: var(--red-dark);
-  font-size: 11px;
-  font-weight: 850;
-  letter-spacing: 1.45px;
-  line-height: 1.4;
-}
-
-.eyebrow-mark {
-  display: grid;
-  width: 22px;
-  height: 22px;
+  min-height: 100vh;
+  min-height: 100svh;
   place-items: center;
-  border-radius: 50%;
-  background: #f0ddd5;
-  color: var(--red);
-  font-size: 13px;
+  padding: 24px 16px;
 }
 
-.hero h1 {
-  max-width: 620px;
-  margin: 0;
-  color: #2b2c27;
-  font-size: clamp(43px, 5.3vw, 68px);
-  font-weight: 760;
-  letter-spacing: -3.8px;
-  line-height: 1.045;
-  text-wrap: balance;
+.donation-card {
+  width: min(100%, 370px);
+  overflow: hidden;
+  border: 1px solid rgb(52 43 34 / 7%);
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 18px 48px rgb(53 44 35 / 12%), 0 3px 10px rgb(53 44 35 / 5%);
 }
 
-.hero h1 span {
-  color: var(--red);
-}
-
-.hero-lede {
-  max-width: 540px;
-  margin: 22px 0 0;
-  color: #575b54;
-  font-size: clamp(16px, 1.5vw, 18px);
-  line-height: 1.72;
-  text-wrap: pretty;
-}
-
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 21px;
-  margin-top: 29px;
-}
-
-.button {
-  display: inline-flex;
-  min-height: 52px;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  border: 0;
-  border-radius: 12px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 760;
-  line-height: 1.2;
-  text-align: center;
-  text-decoration: none;
-  transition: transform 140ms ease, box-shadow 140ms ease, background-color 140ms ease, border-color 140ms ease;
-}
-
-.button:focus-visible,
-.header-cta:focus-visible,
-.secondary-link:focus-visible,
-.site-footer a:focus-visible {
-  outline: 3px solid #312a18;
-  outline-offset: 3px;
-  box-shadow: 0 0 0 5px #efd178;
-}
-
-.button:active {
-  transform: translateY(1px);
-}
-
-.button-primary {
-  padding: 0 20px;
-  background: var(--green);
+.card-header {
+  padding: 25px 22px 22px;
+  background: var(--header-red);
   color: #fff;
-  box-shadow: 0 8px 18px rgb(23 130 77 / 16%);
+  text-align: center;
 }
 
-.button-primary:hover,
-.copy-button:hover {
-  background: var(--green-hover);
-  box-shadow: 0 10px 24px rgb(23 130 77 / 23%);
+.heart {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  margin: 0 auto 10px;
+  color: #ffd15c;
 }
 
-.secondary-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  border-radius: 4px;
-  color: #4a4e47;
+.heart svg {
+  width: 40px;
+  height: 40px;
+}
+
+.card-header h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 760;
+  letter-spacing: -0.6px;
+  line-height: 1.2;
+}
+
+.card-header p {
+  max-width: 280px;
+  margin: 8px auto 0;
+  color: #fff;
   font-size: 13px;
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.secondary-link span {
-  color: var(--red);
-  font-size: 17px;
-}
-
-.hero-assurance {
-  display: flex;
-  max-width: 410px;
-  align-items: center;
-  gap: 10px;
-  margin-top: 26px;
-  color: #60645d;
-  font-size: 12px;
+  font-weight: 550;
   line-height: 1.5;
 }
 
-.assurance-icon {
-  display: grid;
-  width: 24px;
-  height: 24px;
-  flex: 0 0 auto;
-  place-items: center;
-  border-radius: 50%;
-  background: #e5efe6;
-  color: #247348;
+.card-content {
+  padding: 22px 22px 20px;
+  text-align: center;
 }
 
-.assurance-icon svg {
-  width: 15px;
-  height: 15px;
-}
-
-.pix-card {
-  position: relative;
-  width: 100%;
-  max-width: 438px;
-  justify-self: end;
-  padding: clamp(24px, 3.2vw, 34px);
-  scroll-margin-top: 24px;
-  border: 1px solid rgb(61 55 45 / 6%);
-  border-radius: 24px;
-  background: var(--paper);
-  box-shadow: var(--shadow);
-}
-
-.pix-card::before {
-  position: absolute;
-  top: 0;
-  right: 26px;
-  left: 26px;
-  height: 4px;
-  border-radius: 0 0 8px 8px;
-  background: var(--red);
-  content: "";
-}
-
-.card-topline {
+.field-heading {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 18px;
-}
-
-.card-eyebrow {
-  color: #74776f;
-  font-size: 10px;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 9px;
+  color: #812f29;
+  font-size: 11px;
   font-weight: 850;
-  letter-spacing: 1.1px;
-}
-
-.pix-pill {
-  display: inline-flex;
-  min-height: 27px;
-  align-items: center;
-  gap: 5px;
-  padding: 0 10px;
-  border: 1px solid #d8e9dd;
-  border-radius: 999px;
-  background: #f4faf5;
-  color: #176a40;
-  font-size: 10px;
-  font-weight: 850;
-  letter-spacing: 0.4px;
-}
-
-.pix-pill span {
-  color: var(--green);
-  font-size: 12px;
-}
-
-.pix-card h2 {
-  margin: 0;
-  color: #2b2d28;
-  font-size: clamp(22px, 2.4vw, 27px);
-  font-weight: 730;
-  letter-spacing: -0.9px;
-  line-height: 1.22;
-  text-wrap: balance;
-}
-
-.card-intro {
-  margin: 9px 0 20px;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.6;
-}
-
-.recipient-box {
-  display: grid;
-  gap: 3px;
-  margin-bottom: 17px;
-  padding: 12px 14px;
-  border: 1px solid #ece9e3;
-  border-radius: 11px;
-  background: #fbfaf8;
-}
-
-.recipient-label {
-  color: #757870;
-  font-size: 10px;
-  font-weight: 650;
-  letter-spacing: 0.3px;
-}
-
-.recipient-box strong {
-  color: #343831;
-  font-size: 13px;
-  font-weight: 740;
-  line-height: 1.45;
-  overflow-wrap: anywhere;
-}
-
-.key-heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 7px;
-  color: #33362f;
-  font-size: 12px;
-  font-weight: 780;
+  letter-spacing: 0.65px;
 }
 
 .demo-badge {
-  padding: 4px 7px;
+  padding: 3px 7px;
   border-radius: 999px;
   background: #fff2ce;
   color: #684b0c;
   font-size: 9px;
-  font-weight: 850;
-  letter-spacing: 0.45px;
+  letter-spacing: 0.3px;
+}
+
+.demo-badge[hidden] {
+  display: none;
 }
 
 .pix-key {
-  display: flex;
+  display: grid;
   min-height: 50px;
-  align-items: center;
-  margin: 0 0 12px;
-  padding: 12px 14px;
-  border: 1px solid #e4e0d8;
+  place-items: center;
+  margin: 0 0 13px;
+  padding: 11px 12px;
+  border: 1.5px dashed #bd695f;
   border-radius: 11px;
-  background: #f9f8f5;
+  background: #fcfaf8;
   color: #252823;
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-  font-size: 14px;
-  font-weight: 650;
-  line-height: 1.45;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
   overflow-wrap: anywhere;
   user-select: text;
 }
 
 .copy-button {
+  display: inline-flex;
   width: 100%;
   min-height: 54px;
-  padding: 0 18px;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 11px;
   background: var(--green);
   color: #fff;
-  box-shadow: 0 8px 18px rgb(23 130 77 / 14%);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 800;
+  transition: background-color 140ms ease, transform 140ms ease;
 }
 
-.copy-icon {
-  width: 19px;
-  height: 19px;
-  flex: 0 0 auto;
+.copy-button:hover {
+  background: var(--green-hover);
+}
+
+.copy-button:active {
+  transform: translateY(1px);
+}
+
+.copy-button:focus-visible {
+  outline: 3px solid #302718;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 5px #ffcf57;
 }
 
 .copy-button.is-copied {
   background: #126b40;
 }
 
+.copy-icon {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+}
+
 .copy-status {
-  min-height: 19px;
-  margin: 8px 0 0;
-  color: #196e43;
+  margin: 9px 0 0;
+  color: #176a40;
   font-size: 12px;
   font-weight: 700;
   line-height: 1.5;
+}
+
+.copy-status:empty {
+  display: none;
 }
 
 .copy-status[data-state="error"] {
   color: #9c3229;
 }
 
-.recipient-check {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  margin-top: 8px;
-  padding: 13px 12px;
-  border-radius: 12px;
-  background: #f3f7f0;
-}
-
-.check-icon {
-  display: grid;
-  width: 21px;
-  height: 21px;
-  flex: 0 0 auto;
-  place-items: center;
-  border-radius: 50%;
-  background: #e0eddf;
-  color: #267347;
-}
-
-.check-icon svg {
-  width: 13px;
-  height: 13px;
-}
-
-.recipient-check p {
-  margin: 0;
-  color: #525a50;
-  font-size: 11px;
-  line-height: 1.55;
-}
-
-.recipient-check strong {
-  color: #354337;
-}
-
-.demo-notice {
-  display: flex;
-  align-items: flex-start;
-  gap: 7px;
-  margin: 13px 0 0;
-  color: #805c15;
-  font-size: 10px;
-  line-height: 1.55;
-}
-
-.demo-notice svg {
-  width: 16px;
-  height: 16px;
-  flex: 0 0 auto;
-  margin-top: 1px;
-}
-
-.demo-notice code {
-  padding: 0 3px;
-  border-radius: 3px;
-  background: #fff0c6;
-  color: #614606;
-  font-family: "SFMono-Regular", Consolas, monospace;
-  font-size: 10px;
-}
-
-.steps-section {
-  padding-block: 68px 78px;
-  border-top: 1px solid rgb(37 40 35 / 6%);
-  background: #fff;
-}
-
-.section-heading {
-  max-width: 620px;
-  margin: 0 auto 30px;
-  text-align: center;
-}
-
-.section-heading .eyebrow {
-  justify-content: center;
-  margin-bottom: 9px;
-  font-size: 10px;
-}
-
-.section-heading h2 {
-  margin: 0;
-  color: #2b2d28;
-  font-size: clamp(27px, 3.2vw, 37px);
-  font-weight: 740;
-  letter-spacing: -1.45px;
-  line-height: 1.2;
-  text-wrap: balance;
-}
-
-.section-heading > p:last-child {
-  margin: 9px 0 0;
+.recipient {
+  margin: 14px 0 0;
+  padding-top: 11px;
+  border-top: 1px solid #eeeae5;
   color: var(--muted);
-  font-size: 14px;
-}
-
-.steps-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.step-card {
-  display: flex;
-  min-height: 138px;
-  align-items: flex-start;
-  gap: 15px;
-  padding: 22px 20px;
-  border: 1px solid #eceae5;
-  border-radius: 16px;
-  background: #fff;
-}
-
-.step-number {
-  display: grid;
-  width: 37px;
-  height: 37px;
-  flex: 0 0 auto;
-  place-items: center;
-  border-radius: 12px;
-  background: #f5e8e3;
-  color: var(--red-dark);
   font-size: 11px;
-  font-weight: 850;
-  letter-spacing: 0.4px;
-}
-
-.step-card h3 {
-  margin: 1px 0 5px;
-  color: #30332e;
-  font-size: 15px;
-  font-weight: 760;
-  line-height: 1.35;
-}
-
-.step-card p {
-  margin: 0;
-  color: #666a63;
-  font-size: 12px;
-  line-height: 1.6;
-}
-
-.share-section {
-  padding-block: 34px 42px;
-  background: #fff;
-}
-
-.share-panel {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 30px;
-  padding: 27px 32px;
-  border-radius: 19px;
-  background: #762f2a;
-  color: #fff;
-}
-
-.share-copy {
-  display: flex;
-  align-items: center;
-  gap: 17px;
-}
-
-.share-mark {
-  display: grid;
-  width: 43px;
-  height: 43px;
-  flex: 0 0 auto;
-  place-items: center;
-  border: 1px solid rgb(255 255 255 / 30%);
-  border-radius: 14px;
-  color: #ffdc8b;
-  font-size: 27px;
-  line-height: 1;
-}
-
-.share-copy h2 {
-  margin: 0;
-  font-size: 18px;
-  font-weight: 730;
-  letter-spacing: -0.3px;
-  line-height: 1.35;
-}
-
-.share-copy p {
-  margin: 4px 0 0;
-  color: rgb(255 255 255 / 77%);
-  font-size: 12px;
   line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
-.share-action {
-  display: grid;
-  flex: 0 0 auto;
-  justify-items: end;
+.recipient strong {
+  color: #41443d;
+  font-weight: 750;
 }
 
-.share-button {
-  min-height: 46px;
-  padding: 0 16px;
-  border: 1px solid rgb(255 255 255 / 30%);
-  background: transparent;
-  color: #fff;
-  font-size: 12px;
-}
-
-.share-button:hover {
-  border-color: #fff;
-  background: rgb(255 255 255 / 10%);
-}
-
-.share-button svg {
-  width: 18px;
-  height: 18px;
-}
-
-.share-status {
-  min-height: 16px;
-  margin: 5px 0 -5px;
-  color: #ffedc9;
-  font-size: 10px;
-  line-height: 1.4;
-  text-align: right;
-}
-
-.site-footer {
-  background: #fff;
-}
-
-.footer-inner {
-  display: flex;
-  min-height: 66px;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  border-top: 1px solid #eeece7;
-  color: #73766f;
-  font-size: 11px;
-}
-
-.footer-inner p {
-  margin: 0;
-}
-
-.site-footer a {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  border-radius: 3px;
-  color: var(--red-dark);
-  font-size: 11px;
-  font-weight: 720;
-  text-decoration: none;
-}
-
-.site-footer a:hover {
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-@media (max-width: 900px) {
-  .hero {
-    grid-template-columns: minmax(0, 1fr) minmax(330px, 0.9fr);
-    gap: 36px;
+@media (max-width: 380px) {
+  .donation-card {
+    border-radius: 17px;
   }
 
-  .hero h1 {
-    font-size: clamp(42px, 6.2vw, 56px);
-    letter-spacing: -2.9px;
+  .card-header {
+    padding: 23px 18px 20px;
   }
 
-  .steps-grid {
-    gap: 11px;
+  .card-content {
+    padding: 20px 17px 18px;
   }
 
-  .step-card {
-    gap: 11px;
-    padding: 18px 15px;
-  }
-}
-
-@media (max-width: 720px) {
-  .container {
-    width: min(100% - 36px, 540px);
-  }
-
-  .header-inner {
-    min-height: 72px;
-  }
-
-  .brand img {
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
-  }
-
-  .header-cta {
-    min-height: 40px;
-    padding-inline: 12px;
-    font-size: 12px;
-  }
-
-  .hero {
-    grid-template-columns: 1fr;
-    gap: 34px;
-    padding-block: 51px 58px;
-  }
-
-  .hero-copy {
-    max-width: 560px;
-    padding: 0;
-  }
-
-  .hero h1 {
-    max-width: 540px;
-    font-size: clamp(43px, 10vw, 60px);
-    letter-spacing: -2.8px;
-  }
-
-  .hero-lede {
-    max-width: 520px;
-    margin-top: 16px;
-    font-size: 16px;
-  }
-
-  .hero-actions {
-    margin-top: 23px;
-  }
-
-  .hero-assurance {
-    margin-top: 19px;
-  }
-
-  .pix-card {
-    max-width: none;
-    justify-self: stretch;
-  }
-
-  .steps-section {
-    padding-block: 54px 60px;
-  }
-
-  .steps-grid {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-
-  .step-card {
-    min-height: auto;
-    padding: 17px;
-  }
-
-  .share-panel {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 20px;
-    padding: 23px;
-  }
-
-  .share-action {
-    width: 100%;
-    justify-items: stretch;
-  }
-
-  .share-button {
-    width: 100%;
-  }
-
-  .share-status {
-    text-align: center;
-  }
-}
-
-@media (max-width: 420px) {
-  .container {
-    width: min(100% - 28px, 540px);
-  }
-
-  .brand {
-    gap: 9px;
-  }
-
-  .brand-copy strong {
-    font-size: 10px;
-    letter-spacing: 0.9px;
-  }
-
-  .brand-copy span {
-    font-size: 10px;
-  }
-
-  .header-cta {
-    gap: 5px;
-    padding-inline: 10px;
-    font-size: 11px;
-  }
-
-  .header-cta svg {
-    width: 15px;
-    height: 15px;
-  }
-
-  .hero {
-    padding-block: 42px 50px;
-  }
-
-  .hero h1 {
-    font-size: clamp(40px, 11.2vw, 48px);
-    letter-spacing: -2.2px;
-  }
-
-  .hero-actions {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .button-primary {
-    width: 100%;
-  }
-
-  .pix-card {
-    padding: 24px 19px;
-    border-radius: 20px;
-  }
-
-  .card-topline {
-    margin-bottom: 15px;
-  }
-
-  .pix-card h2 {
-    font-size: 23px;
-  }
-
-  .pix-key {
-    font-size: 13px;
-  }
-
-  .steps-section {
-    padding-block: 47px 52px;
-  }
-
-  .section-heading {
-    text-align: left;
-  }
-
-  .section-heading .eyebrow {
-    justify-content: flex-start;
-  }
-
-  .share-copy {
-    align-items: flex-start;
-    gap: 12px;
-  }
-
-  .share-copy h2 {
-    font-size: 16px;
-  }
-
-  .footer-inner {
-    align-items: flex-start;
-    flex-direction: column;
-    justify-content: center;
-    gap: 7px;
-    padding-block: 13px;
+  .card-header h1 {
+    font-size: 22px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
   *,
   *::before,
   *::after {
+    scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
   }
 }
 
     </style>
   </head>
-  <body id="top">
-    <a class="skip-link" href="#pix-card">Ir para a contribuição via PIX</a>
-
-    <header class="site-header">
-      <div class="container header-inner">
-        <a class="brand" href="#top" aria-label="Campanha de apoio — início">
-          <svg class="brand-mark" viewBox="0 0 48 48" role="img" aria-label="Coração com pixels"><rect width="48" height="48" rx="13" fill="#c0392b"/><path d="M24 38 10.4 24.8C5.2 19.8 7.3 10 14.9 10c4.1 0 7 2.4 9.1 5.8 2.1-3.4 5-5.8 9.1-5.8 7.6 0 9.7 9.8 4.5 14.8L24 38Z" fill="#ffd15c"/><rect x="32" y="31" width="5" height="5" rx="1" fill="#2fbd72"/><rect x="38" y="25" width="3.5" height="3.5" rx=".7" fill="#2fbd72"/></svg>
-          <span class="brand-copy">
-            <strong>APOIO SOLIDÁRIO</strong>
-            <span>Uma campanha de apoio</span>
+  <body>
+    <main class="page-shell">
+      <section class="donation-card" aria-labelledby="page-title">
+        <header class="card-header">
+          <span class="heart" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><path d="M24 41 9.2 26.9C2.8 20.8 5.3 9.5 14.1 9.5c4.4 0 7.6 2.6 9.9 6.6 2.3-4 5.5-6.6 9.9-6.6 8.8 0 11.3 11.3 4.9 17.4L24 41Z" fill="currentColor" /></svg>
           </span>
-        </a>
-        <a class="header-cta" href="#pix-card">
-          Contribuir via PIX
-          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M10 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
-        </a>
-      </div>
-    </header>
+          <h1 id="page-title">Ajude essa causa</h1>
+          <p>Copie a chave e conclua a doação no app do seu banco.</p>
+        </header>
 
-    <main>
-      <section class="hero container" aria-labelledby="hero-title">
-        <div class="hero-copy">
-          <p class="eyebrow"><span class="eyebrow-mark" aria-hidden="true">✳</span> UMA CAMPANHA DE APOIO</p>
-          <h1 id="hero-title">Toda ajuda começa com <span>um gesto.</span></h1>
-          <p class="hero-lede">Contribua pelo PIX de um jeito simples. Escolha o valor no app do seu banco e confira o nome do recebedor antes de confirmar.</p>
-
-          <div class="hero-actions">
-            <a class="button button-primary" href="#pix-card">
-              Quero contribuir
-              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M10 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
-            </a>
-            <a class="secondary-link" href="#como-doar">Como funciona <span aria-hidden="true">↓</span></a>
+        <div class="card-content">
+          <div class="field-heading">
+            <span id="pixKeyLabel">CHAVE PIX</span>
+            <span class="demo-badge" id="demoBadge">DEMONSTRAÇÃO</span>
           </div>
 
-          <div class="hero-assurance">
-            <span class="assurance-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="m5 12 4.2 4.2L19 6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-            </span>
-            <span>Você confirma a transferência diretamente no app do seu banco.</span>
-          </div>
-        </div>
-
-        <section class="pix-card" id="pix-card" aria-labelledby="pix-title">
-          <div class="card-topline">
-            <span class="card-eyebrow">CONTRIBUIÇÃO DIRETA</span>
-            <span class="pix-pill"><span aria-hidden="true">✦</span> PIX</span>
-          </div>
-
-          <h2 id="pix-title">Contribua com o valor que preferir</h2>
-          <p class="card-intro">Copie a chave e faça a transferência pelo aplicativo do seu banco.</p>
-
-          <div class="recipient-box">
-            <span class="recipient-label">Recebedor</span>
-            <strong id="recipientName">NOME DO BENEFICIÁRIO (DEMONSTRAÇÃO)</strong>
-          </div>
-
-          <div class="key-heading">
-            <span id="pixKeyLabel">Chave PIX</span>
-            <span class="demo-badge" id="demoBadge">DADOS DE DEMONSTRAÇÃO</span>
-          </div>
           <p class="pix-key" id="pixKey" aria-labelledby="pixKeyLabel">SUA-CHAVE-PIX-AQUI</p>
 
-          <button class="button copy-button" id="copyButton" type="button">
+          <button class="copy-button" id="copyButton" type="button">
             <svg class="copy-icon" viewBox="0 0 24 24" aria-hidden="true">
               <rect x="8" y="8" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.9" />
               <path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
             <span class="button-label">Copiar chave PIX</span>
           </button>
+
           <p class="copy-status" id="copyStatus" role="status" aria-live="polite" aria-atomic="true"></p>
 
-          <div class="recipient-check">
-            <span class="check-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="m5 12 4.2 4.2L19 6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-            </span>
-            <p><strong>Confira antes de confirmar.</strong> O nome exibido no seu banco deve corresponder ao recebedor informado.</p>
-          </div>
-
-          <p class="demo-notice" id="demoNotice">
-            <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.2" fill="none" stroke="currentColor" stroke-width="1.6" /><path d="M10 9v4M10 6.5v.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" /></svg>
-            Página demonstrativa. Atualize a chave e o recebedor no bloco <code>campaignConfig</code> deste arquivo antes de divulgar.
-          </p>
-        </section>
-      </section>
-
-      <section class="steps-section" id="como-doar" aria-labelledby="steps-title">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">RÁPIDO E SIMPLES</p>
-            <h2 id="steps-title">Como contribuir pelo PIX</h2>
-            <p>Três passos para fazer sua contribuição pelo aplicativo do seu banco.</p>
-          </div>
-
-          <ol class="steps-grid">
-            <li class="step-card">
-              <span class="step-number">01</span>
-              <div>
-                <h3>Copie a chave</h3>
-                <p>Toque no botão verde acima para copiar a chave PIX.</p>
-              </div>
-            </li>
-            <li class="step-card">
-              <span class="step-number">02</span>
-              <div>
-                <h3>Abra seu banco</h3>
-                <p>Escolha PIX, cole a chave e informe o valor que deseja contribuir.</p>
-              </div>
-            </li>
-            <li class="step-card">
-              <span class="step-number">03</span>
-              <div>
-                <h3>Confira e confirme</h3>
-                <p>Verifique o nome do recebedor e o valor antes de concluir.</p>
-              </div>
-            </li>
-          </ol>
-        </div>
-      </section>
-
-      <section class="share-section" aria-labelledby="share-title">
-        <div class="container share-panel">
-          <div class="share-copy">
-            <span class="share-mark" aria-hidden="true">♡</span>
-            <div>
-              <h2 id="share-title">Conhece alguém que gostaria de ajudar?</h2>
-              <p>Compartilhe esta página para que mais pessoas possam conhecer a campanha.</p>
-            </div>
-          </div>
-          <div class="share-action">
-            <button class="button share-button" id="shareButton" type="button">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3" fill="none" stroke="currentColor" stroke-width="1.8" /><circle cx="6" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8" /><circle cx="18" cy="19" r="3" fill="none" stroke="currentColor" stroke-width="1.8" /><path d="m8.7 10.6 6.6-4.2m-6.6 7 6.6 4.2" fill="none" stroke="currentColor" stroke-width="1.8" /></svg>
-              Compartilhar campanha
-            </button>
-            <p class="share-status" id="shareStatus" role="status" aria-live="polite" aria-atomic="true"></p>
-          </div>
+          <p class="recipient">Recebedor: <strong id="recipientName">NOME DO BENEFICIÁRIO (DEMONSTRAÇÃO)</strong></p>
         </div>
       </section>
     </main>
-
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <p>Antes de confirmar qualquer transferência, confira os dados exibidos no aplicativo do seu banco.</p>
-        <a href="#pix-card">Voltar à contribuição <span aria-hidden="true">↑</span></a>
-      </div>
-    </footer>
-
     <script>
-// Substitua a chave e o nome abaixo pelos dados reais antes de divulgar a campanha.
-// Mantenha demoMode: true enquanto os dados forem fictícios; use false somente após conferir os dados reais.
-const campaignConfig = {
+// Substitua a chave e o nome abaixo pelos dados reais antes de divulgar.
+const pixConfig = {
   pixKey: "SUA-CHAVE-PIX-AQUI",
   recipient: "NOME DO BENEFICIÁRIO (DEMONSTRAÇÃO)",
   demoMode: true,
@@ -1135,35 +294,30 @@ const campaignConfig = {
 
 const pixKeyElement = document.querySelector("#pixKey");
 const recipientElement = document.querySelector("#recipientName");
-const copyButton = document.querySelector("#copyButton");
-const copyButtonLabel = copyButton.querySelector(".button-label");
-const copyStatus = document.querySelector("#copyStatus");
 const demoBadge = document.querySelector("#demoBadge");
-const demoNotice = document.querySelector("#demoNotice");
-const shareButton = document.querySelector("#shareButton");
-const shareStatus = document.querySelector("#shareStatus");
-const defaultCopyLabel = "Copiar chave PIX";
-let copyResetTimer;
+const copyButton = document.querySelector("#copyButton");
+const buttonLabel = copyButton.querySelector(".button-label");
+const copyStatus = document.querySelector("#copyStatus");
+const defaultButtonLabel = "Copiar chave PIX";
+let resetTimer;
 
-pixKeyElement.textContent = campaignConfig.pixKey;
-recipientElement.textContent = campaignConfig.recipient;
+pixKeyElement.textContent = pixConfig.pixKey;
+recipientElement.textContent = pixConfig.recipient;
 
-const hasPlaceholderValues =
-  campaignConfig.pixKey === "SUA-CHAVE-PIX-AQUI" ||
-  campaignConfig.recipient === "NOME DO BENEFICIÁRIO (DEMONSTRAÇÃO)";
-const showDemoNotice = campaignConfig.demoMode || hasPlaceholderValues;
-demoBadge.hidden = !showDemoNotice;
-demoNotice.hidden = !showDemoNotice;
+const hasDemoValues =
+  pixConfig.pixKey === "SUA-CHAVE-PIX-AQUI" ||
+  pixConfig.recipient === "NOME DO BENEFICIÁRIO (DEMONSTRAÇÃO)";
+demoBadge.hidden = !(pixConfig.demoMode || hasDemoValues);
 
-function legacyCopy(text) {
-  const temporaryInput = document.createElement("textarea");
-  temporaryInput.value = text;
-  temporaryInput.setAttribute("readonly", "");
-  temporaryInput.setAttribute("aria-hidden", "true");
-  temporaryInput.style.position = "fixed";
-  temporaryInput.style.left = "-9999px";
-  document.body.append(temporaryInput);
-  temporaryInput.select();
+function copyWithFallback(text) {
+  const input = document.createElement("textarea");
+  input.value = text;
+  input.setAttribute("readonly", "");
+  input.setAttribute("aria-hidden", "true");
+  input.style.position = "fixed";
+  input.style.left = "-9999px";
+  document.body.append(input);
+  input.select();
 
   let copied = false;
   try {
@@ -1172,81 +326,47 @@ function legacyCopy(text) {
     copied = false;
   }
 
-  temporaryInput.remove();
+  input.remove();
   return copied;
 }
 
-async function copyText(text) {
-  if (navigator.clipboard?.writeText && window.isSecureContext) {
-    try {
-      await navigator.clipboard.writeText(text);
-      return true;
-    } catch {
-      // Usa o fallback se a permissão da Clipboard API for negada.
-    }
-  }
-  return legacyCopy(text);
-}
-
 async function copyPixKey() {
-  window.clearTimeout(copyResetTimer);
+  window.clearTimeout(resetTimer);
   copyStatus.textContent = "";
   copyStatus.removeAttribute("data-state");
 
-  const copied = await copyText(campaignConfig.pixKey);
-  if (copied) {
-    copyButtonLabel.textContent = "Chave copiada!";
-    copyButton.classList.add("is-copied");
-    copyStatus.textContent = "Chave copiada. Abra o app do seu banco para fazer a transferência.";
+  let copied = false;
+  if (navigator.clipboard?.writeText && window.isSecureContext) {
+    try {
+      await navigator.clipboard.writeText(pixConfig.pixKey);
+      copied = true;
+    } catch {
+      copied = copyWithFallback(pixConfig.pixKey);
+    }
   } else {
-    copyButtonLabel.textContent = defaultCopyLabel;
+    copied = copyWithFallback(pixConfig.pixKey);
+  }
+
+  if (copied) {
+    buttonLabel.textContent = "Chave copiada!";
+    copyButton.classList.add("is-copied");
+    copyStatus.textContent = pixConfig.demoMode || hasDemoValues
+      ? "Chave demonstrativa copiada. Substitua os dados antes de divulgar."
+      : "Chave copiada. Cole no app do seu banco para concluir a doação.";
+  } else {
+    buttonLabel.textContent = defaultButtonLabel;
     copyButton.classList.remove("is-copied");
     copyStatus.dataset.state = "error";
     copyStatus.textContent = "Não foi possível copiar. Selecione a chave e copie manualmente.";
   }
 
-  copyResetTimer = window.setTimeout(() => {
-    copyButtonLabel.textContent = defaultCopyLabel;
+  resetTimer = window.setTimeout(() => {
+    buttonLabel.textContent = defaultButtonLabel;
     copyButton.classList.remove("is-copied");
-  }, 2400);
-}
-
-async function shareCampaign() {
-  shareStatus.textContent = "";
-  if (window.location.protocol === "file:") {
-    shareStatus.dataset.state = "error";
-    shareStatus.textContent = "Publique este arquivo em um endereço web para compartilhar a campanha.";
-    return;
-  }
-  shareStatus.removeAttribute("data-state");
-  const shareData = {
-    title: document.title,
-    text: "Conheça esta campanha de apoio.",
-    url: window.location.href,
-  };
-
-  if (navigator.share) {
-    try {
-      await navigator.share(shareData);
-      shareStatus.textContent = "Compartilhamento aberto.";
-      return;
-    } catch (error) {
-      if (error?.name === "AbortError") return;
-      // Se o compartilhamento nativo falhar, tenta copiar o link.
-    }
-  }
-
-  const copied = await copyText(shareData.url);
-  if (copied) {
-    shareStatus.textContent = "Link copiado. Compartilhe com quem pode apoiar.";
-  } else {
-    shareStatus.dataset.state = "error";
-    shareStatus.textContent = "Não foi possível copiar o link. Copie o endereço da página.";
-  }
+  }, 2200);
 }
 
 copyButton.addEventListener("click", copyPixKey);
-shareButton.addEventListener("click", shareCampaign);
 
     </script>
   </body>
