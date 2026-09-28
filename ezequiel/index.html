@@ -10,149 +10,165 @@
 <style>
 :root {
   color-scheme: light;
-  --bg: #e8eeeb;
-  --pine: #0f4c45;
-  --pine-dark: #0a3732;
-  --action: #0c7a5e;
-  --action-hover: #0a664e;
-  --amber: #f2b544;
-  --ink: #16211f;
-  --muted: #5a6764;
-  --line: #dbe3e0;
-  --tint: #f2f6f4;
-  --warn-bg: #fff4d6;
-  --warn-ink: #5e4508;
-  --err: #9c3229;
+  --pine: #0f4c45; --pine-dark: #0a3732; --action: #0c7a5e; --action-hover: #0a664e;
+  --amber: #f2b544; --ink: #16211f; --body: #2b3a37; --muted: #5a6764;
+  --line: #dbe3e0; --tint: #f2f6f4; --warn-bg: #fff4d6; --warn-ink: #5e4508; --err: #9c3229;
+  --serif: Georgia, "Iowan Old Style", "Times New Roman", serif;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 * { box-sizing: border-box; }
-html, body { margin: 0; min-width: 320px; background: var(--bg); color: var(--ink); }
-body { min-height: 100svh; line-height: 1.55; }
+html, body { margin: 0; min-width: 320px; background: #fff; color: var(--ink); }
+body { line-height: 1.6; }
 button { font: inherit; cursor: pointer; }
-.shell { display: grid; place-items: start center; padding: 28px 16px 40px; }
-.card { width: min(100%, 440px); overflow: hidden; border-radius: 18px; background: #fff; box-shadow: 0 20px 50px rgb(15 76 69 / 16%); }
+.wrap { width: min(100% - 40px, 1080px); margin-inline: auto; }
 
-.hero { padding: 30px 26px 26px; background: var(--pine); color: #fff; }
-.hero svg { width: 34px; height: 34px; color: var(--amber); }
-.hero h1 { margin: 12px 0 8px; font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; font-size: 30px; font-weight: 700; line-height: 1.15; letter-spacing: -0.4px; }
-.hero p { margin: 0; color: #d5e6e2; font-size: 15px; }
-
-.demo { display: none; margin: 0; padding: 10px 26px; background: var(--warn-bg); color: var(--warn-ink); font-size: 13px; font-weight: 600; }
+.demo { display: none; padding: 10px 20px; background: var(--warn-bg); color: var(--warn-ink); font-size: 13px; font-weight: 600; text-align: center; }
 .demo.on { display: block; }
 
-.body { padding: 24px 26px 8px; }
-.story { margin: 0 0 22px; font-size: 15px; color: #2b3a37; }
-.story:empty { display: none; }
+.topbar { background: var(--pine); color: #fff; }
+.topbar .wrap { display: flex; align-items: center; gap: 10px; padding: 16px 0; font-weight: 700; }
+.topbar svg { width: 24px; height: 24px; color: var(--amber); }
 
-.recipient { display: flex; gap: 12px; align-items: center; margin-bottom: 18px; padding: 12px 14px; border-radius: 12px; background: var(--tint); border: 1px solid var(--line); }
+.hero { background: var(--pine); color: #fff; padding: 28px 0 56px; }
+.hero .wrap { display: grid; gap: 32px; align-items: start; }
+.hero h1 { margin: 0 0 14px; font-family: var(--serif); font-size: clamp(34px, 6vw, 56px); line-height: 1.08; letter-spacing: -0.8px; }
+.hero .lead { margin: 0; max-width: 520px; color: #d5e6e2; font-size: clamp(16px, 2.2vw, 19px); }
+.trust { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 24px 0 0; padding: 0; list-style: none; color: #e6f1ee; font-size: 14px; font-weight: 600; }
+.trust li::before { content: "✓"; margin-right: 7px; color: var(--amber); }
+
+.panel { padding: 24px; border-radius: 16px; background: #fff; color: var(--ink); box-shadow: 0 18px 44px rgb(0 0 0 / 22%); }
+.recipient { display: flex; gap: 12px; align-items: center; margin-bottom: 18px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--tint); }
 .recipient svg { flex: none; width: 24px; height: 24px; color: var(--action); }
 .recipient small { display: block; color: var(--muted); font-size: 12px; }
 .recipient strong { font-size: 15px; overflow-wrap: anywhere; }
-
-.key-label { margin: 0 0 6px; font-size: 13px; font-weight: 700; color: var(--pine); }
+.key-label { margin: 0 0 6px; color: var(--pine); font-size: 13px; font-weight: 700; }
 .key { margin: 0 0 12px; padding: 14px; border: 2px dashed var(--action); border-radius: 12px; background: #f7fbf9; font: 700 15px/1.4 ui-monospace, "SFMono-Regular", Consolas, monospace; text-align: center; overflow-wrap: anywhere; user-select: all; }
-
 .btn { display: flex; width: 100%; min-height: 56px; align-items: center; justify-content: center; gap: 10px; border: 0; border-radius: 12px; font-size: 16px; font-weight: 800; transition: background-color .15s, transform .1s; }
 .btn:active { transform: translateY(1px); }
-.btn:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+.btn:focus-visible, .contacts a:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
 .btn svg { width: 20px; height: 20px; }
 .btn-main { background: var(--action); color: #fff; }
 .btn-main:hover { background: var(--action-hover); }
 .btn-main.done { background: var(--pine-dark); }
-.btn-alt { min-height: 48px; margin-top: 10px; background: #fff; color: var(--pine); border: 1.5px solid var(--line); font-size: 14px; font-weight: 700; }
+.btn-alt { min-height: 48px; margin-top: 10px; border: 1.5px solid var(--line); background: #fff; color: var(--pine); font-size: 14px; font-weight: 700; }
 .btn-alt:hover { background: var(--tint); }
 .status { min-height: 22px; margin: 8px 0 0; color: var(--action-hover); font-size: 13px; font-weight: 600; text-align: center; }
 .status[data-state="error"] { color: var(--err); }
 
-.section { margin: 22px 0 0; padding-top: 20px; border-top: 1px solid var(--line); }
-.section h2 { margin: 0 0 12px; font-size: 16px; }
-.steps, .uses { margin: 0; padding: 0; list-style: none; }
-.steps li { display: flex; gap: 12px; margin-bottom: 10px; font-size: 14px; color: #2b3a37; }
-.steps li::before { content: counter(s); counter-increment: s; flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--pine); color: #fff; font-size: 13px; font-weight: 700; display: grid; place-items: center; }
-.steps { counter-reset: s; }
-.uses li { position: relative; margin-bottom: 8px; padding-left: 22px; font-size: 14px; color: #2b3a37; }
-.uses li::before { content: ""; position: absolute; left: 2px; top: 8px; width: 8px; height: 8px; border-radius: 50%; background: var(--amber); }
-.section[hidden] { display: none; }
+section.band { padding: 56px 0; }
+section.band.alt { background: var(--tint); }
+section[hidden] { display: none; }
+.band h2 { margin: 0 0 20px; font-family: var(--serif); font-size: clamp(26px, 4vw, 34px); line-height: 1.2; }
+.story { max-width: 680px; margin: 0; font-size: 18px; color: var(--body); white-space: pre-line; }
 
-.contacts { display: flex; flex-wrap: wrap; gap: 8px; }
-.contacts a { padding: 8px 14px; border: 1.5px solid var(--line); border-radius: 999px; color: var(--pine); font-size: 13px; font-weight: 700; text-decoration: none; }
+.steps { display: grid; gap: 16px; margin: 0; padding: 0; list-style: none; counter-reset: s; }
+.steps li { counter-increment: s; padding: 22px; border: 1px solid var(--line); border-radius: 14px; background: #fff; color: var(--body); }
+.steps li::before { content: counter(s); display: grid; place-items: center; width: 32px; height: 32px; margin-bottom: 12px; border-radius: 50%; background: var(--pine); color: #fff; font-weight: 700; }
+.uses { display: grid; gap: 12px; max-width: 680px; margin: 0; padding: 0; list-style: none; }
+.uses li { position: relative; padding-left: 26px; font-size: 17px; color: var(--body); }
+.uses li::before { content: ""; position: absolute; left: 2px; top: 10px; width: 10px; height: 10px; border-radius: 50%; background: var(--amber); }
+.contacts { display: flex; flex-wrap: wrap; gap: 10px; }
+.contacts a { padding: 10px 18px; border: 1.5px solid var(--line); border-radius: 999px; background: #fff; color: var(--pine); font-weight: 700; text-decoration: none; }
 .contacts a:hover { background: var(--tint); }
-.contacts a:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
 
-.safety { margin: 22px -26px 0; padding: 16px 26px 20px; background: var(--tint); color: var(--muted); font-size: 12.5px; }
-.safety strong { color: var(--ink); }
+.safety { padding: 28px 0; background: var(--pine-dark); color: #cfe0dc; font-size: 14px; }
+.safety strong { color: #fff; }
 
-@media (max-width: 380px) {
-  .hero { padding: 26px 20px 22px; }
-  .hero h1 { font-size: 26px; }
-  .body { padding: 20px 20px 6px; }
-  .safety { margin-inline: -20px; padding-inline: 20px; }
+@media (min-width: 860px) {
+  .hero { padding: 40px 0 72px; }
+  .hero .wrap { grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items: center; }
+  .steps { grid-template-columns: repeat(3, 1fr); }
+  section.band { padding: 72px 0; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 </head>
 <body>
-<main class="shell">
-  <article class="card" aria-labelledby="title">
-    <header class="hero">
-      <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 41 9.2 26.9C2.8 20.8 5.3 9.5 14.1 9.5c4.4 0 7.6 2.6 9.9 6.6 2.3-4 5.5-6.6 9.9-6.6 8.8 0 11.3 11.3 4.9 17.4L24 41Z" fill="currentColor"/></svg>
-      <h1 id="title"></h1>
-      <p id="subtitle"></p>
-    </header>
-    <p class="demo" id="demo" role="note">Modo demonstração: preencha os dados reais no bloco “config” antes de divulgar esta página.</p>
+<p class="demo" id="demo" role="note">Modo demonstração: preencha os dados reais no bloco “config” antes de divulgar esta página.</p>
 
-    <div class="body">
-      <p class="story" id="story"></p>
+<header class="topbar">
+  <div class="wrap">
+    <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 41 9.2 26.9C2.8 20.8 5.3 9.5 14.1 9.5c4.4 0 7.6 2.6 9.9 6.6 2.3-4 5.5-6.6 9.9-6.6 8.8 0 11.3 11.3 4.9 17.4L24 41Z" fill="currentColor"/></svg>
+    <span id="brand"></span>
+  </div>
+</header>
 
-      <div class="recipient">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m8.5 12 2.5 2.5 4.5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <div><small>A doação será enviada para</small><strong id="recipient"></strong></div>
+<main>
+  <section class="hero" aria-labelledby="title">
+    <div class="wrap">
+      <div>
+        <h1 id="title"></h1>
+        <p class="lead" id="subtitle"></p>
+        <ul class="trust">
+          <li>Direto por PIX</li>
+          <li>Sem taxas</li>
+          <li>Recebedor identificado</li>
+        </ul>
       </div>
 
-      <p class="key-label" id="keyLabel">Chave PIX</p>
-      <p class="key" id="key" aria-labelledby="keyLabel"></p>
-
-      <button class="btn btn-main" id="copy" type="button">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span id="copyLabel">Copiar chave PIX</span>
-      </button>
-      <button class="btn btn-alt" id="share" type="button">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="6" cy="12" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="18" cy="19" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m8.3 10.8 7.4-4.4M8.3 13.2l7.4 4.4" stroke="currentColor" stroke-width="1.8" fill="none"/></svg>
-        <span id="shareLabel">Compartilhar esta campanha</span>
-      </button>
-      <p class="status" id="status" role="status" aria-live="polite" aria-atomic="true"></p>
-
-      <section class="section">
-        <h2>Como doar em 3 passos</h2>
-        <ol class="steps">
-          <li>Copie a chave PIX acima.</li>
-          <li>Abra o app do seu banco e escolha Pix &gt; Pagar com chave (ou “Pix copia e cola”).</li>
-          <li>Cole a chave, confira o nome do recebedor, informe o valor e confirme.</li>
-        </ol>
-      </section>
-
-      <section class="section" id="usesSection" hidden>
-        <h2 id="usesTitle">Para onde vai a sua doação</h2>
-        <ul class="uses" id="uses"></ul>
-      </section>
-
-      <section class="section" id="contactSection" hidden>
-        <h2>Fale com a gente</h2>
-        <div class="contacts" id="contacts"></div>
-      </section>
-
-      <div class="safety">
-        <strong>Doe com segurança.</strong> Antes de confirmar no app do banco, confira se o nome do recebedor é o mesmo mostrado acima. Nunca envie comprovantes ou dados pessoais a quem pedir por mensagem em nome da campanha.
+      <div class="panel" id="doar">
+        <div class="recipient">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m8.5 12 2.5 2.5 4.5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><small>A doação será enviada para</small><strong id="recipient"></strong></div>
+        </div>
+        <p class="key-label" id="keyLabel">Chave PIX</p>
+        <p class="key" id="key" aria-labelledby="keyLabel"></p>
+        <button class="btn btn-main" id="copy" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span id="copyLabel">Copiar chave PIX</span>
+        </button>
+        <button class="btn btn-alt" id="share" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="6" cy="12" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="18" cy="19" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m8.3 10.8 7.4-4.4M8.3 13.2l7.4 4.4" stroke="currentColor" stroke-width="1.8" fill="none"/></svg>
+          <span>Compartilhar esta campanha</span>
+        </button>
+        <p class="status" id="status" role="status" aria-live="polite" aria-atomic="true"></p>
       </div>
     </div>
-  </article>
+  </section>
+
+  <section class="band" id="storySection" hidden>
+    <div class="wrap">
+      <h2>Por que sua ajuda importa</h2>
+      <p class="story" id="story"></p>
+    </div>
+  </section>
+
+  <section class="band alt" aria-labelledby="stepsTitle">
+    <div class="wrap">
+      <h2 id="stepsTitle">Como doar em 3 passos</h2>
+      <ol class="steps">
+        <li>Copie a chave PIX no botão verde acima.</li>
+        <li>Abra o app do seu banco e escolha Pix &gt; Pagar com chave (ou “Pix copia e cola”).</li>
+        <li>Cole a chave, confira o nome do recebedor, informe o valor e confirme.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band" id="usesSection" hidden>
+    <div class="wrap">
+      <h2 id="usesTitle"></h2>
+      <ul class="uses" id="uses"></ul>
+    </div>
+  </section>
+
+  <section class="band alt" id="contactSection" hidden>
+    <div class="wrap">
+      <h2>Fale com a gente</h2>
+      <div class="contacts" id="contacts"></div>
+    </div>
+  </section>
 </main>
+
+<footer class="safety">
+  <div class="wrap"><strong>Doe com segurança.</strong> Antes de confirmar no app do banco, confira se o nome do recebedor é o mesmo mostrado nesta página. Nunca envie comprovantes ou dados pessoais a quem pedir por mensagem em nome da campanha.</div>
+</footer>
 
 <script>
 /* ===================== EDITE AQUI ===================== */
 const config = {
   demoMode: true,                                   // mude para false quando tudo estiver preenchido
+  brand: "Nome da campanha ou instituição",
   title: "Ajude essa causa",
   subtitle: "Sua doação chega direto a quem precisa, por PIX, sem taxas.",
   story: "",                                        // 2 a 4 frases: quem você é, o que aconteceu, o que será feito com o dinheiro
@@ -169,14 +185,15 @@ const $ = (id) => document.getElementById(id);
 const isPlaceholder = config.demoMode || /DEMONSTRAÇÃO/i.test(config.recipient) || config.pixKey === "SUA-CHAVE-PIX-AQUI";
 
 document.title = config.title;
+$("brand").textContent = config.brand;
 $("title").textContent = config.title;
 $("subtitle").textContent = config.subtitle;
-$("story").textContent = config.story;
 $("recipient").textContent = config.recipient;
 $("key").textContent = config.pixKey;
 $("keyLabel").textContent = "Chave PIX (" + config.pixKeyType + ")";
 $("demo").classList.toggle("on", isPlaceholder);
 
+if (config.story.trim()) { $("story").textContent = config.story; $("storySection").hidden = false; }
 if (config.uses.length) {
   $("usesTitle").textContent = config.usesTitle;
   config.uses.forEach((t) => { const li = document.createElement("li"); li.textContent = t; $("uses").append(li); });
@@ -204,13 +221,12 @@ async function copyText(text) {
   }
   return legacyCopy(text);
 }
-
-let timer;
 function say(msg, error) {
   $("status").textContent = msg;
   if (error) $("status").dataset.state = "error"; else $("status").removeAttribute("data-state");
 }
 
+let timer;
 $("copy").addEventListener("click", async () => {
   clearTimeout(timer);
   const ok = await copyText(config.pixKey);
@@ -222,9 +238,8 @@ $("copy").addEventListener("click", async () => {
 });
 
 $("share").addEventListener("click", async () => {
-  const data = { title: config.title, text: config.title + " — doe por PIX:", url: location.href };
   if (navigator.share) {
-    try { await navigator.share(data); } catch { /* cancelado pela pessoa */ }
+    try { await navigator.share({ title: config.title, text: config.title + " — doe por PIX:", url: location.href }); } catch { /* cancelado */ }
     return;
   }
   const ok = await copyText(location.href);
