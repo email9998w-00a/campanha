@@ -39,6 +39,13 @@ button { font: inherit; cursor: pointer; }
 .intro { grid-area: intro; }
 .panel { grid-area: panel; }
 .trust { grid-area: trust; }
+.campaign-image { position: relative; overflow: hidden; max-width: 620px; margin: 20px 0 0; border: 1px solid rgb(255 255 255 / 18%); border-radius: 20px; background: rgb(255 255 255 / 10%); box-shadow: 0 14px 30px rgb(0 0 0 / 12%); aspect-ratio: 4 / 3; }
+.campaign-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.image-placeholder { display: grid; width: 100%; height: 100%; place-items: center; align-content: center; gap: 9px; padding: 24px; color: #dcece8; text-align: center; }
+.image-placeholder svg { width: 34px; height: 34px; color: var(--amber); }
+.image-placeholder strong { color: #fff; font-size: 15px; }
+.image-placeholder span { max-width: 250px; font-size: 12px; line-height: 1.45; }
+.campaign-image[hidden] { display: none; }
 .hero h1 { margin: 0 0 10px; font-family: var(--serif); font-size: clamp(30px, 8vw, 56px); line-height: 1.1; letter-spacing: -0.6px; text-wrap: balance; }
 .hero .lead { margin: 0; max-width: 520px; color: #d5e6e2; font-size: clamp(16px, 2.2vw, 19px); }
 .trust { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 0; padding: 0; list-style: none; color: #e6f1ee; font-size: 14px; font-weight: 600; }
@@ -170,6 +177,14 @@ section.band.alt { background: #eef5f2; }
       <div class="intro">
         <h1 id="title"></h1>
         <p class="lead" id="subtitle"></p>
+        <figure class="campaign-image" id="campaignImage" aria-label="Imagem da campanha">
+          <div class="image-placeholder" id="imagePlaceholder">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="8.5" cy="9" r="1.7" fill="currentColor"/><path d="m4.5 18 4.8-4.8 3.2 3.1 2.1-2.2 4.9 4.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <strong>Imagem da campanha</strong>
+            <span>Substitua este espaço por uma foto relacionada à causa.</span>
+          </div>
+          <img id="campaignImageSrc" alt="" hidden />
+        </figure>
       </div>
 
       <div class="panel" id="doar">
@@ -251,6 +266,8 @@ const config = {
   brand: "Nome da campanha ou instituição",
   title: "Ajude essa causa",
   subtitle: "Sua doação chega direto a quem precisa, por PIX, sem taxas.",
+  image: "",                                      // URL ou caminho da imagem da campanha
+  imageAlt: "Imagem da campanha",
   story: "",                                        // 2 a 4 frases: quem você é, o que aconteceu, o que será feito com o dinheiro
   recipient: "Ezequiel",                         // exatamente como aparece no app do banco
   pixKey: "ajuda.fazerobem@gmail.com",
@@ -272,6 +289,13 @@ $("recipient").textContent = config.recipient;
 $("key").textContent = config.pixKey;
 $("keyLabel").textContent = "Chave PIX (" + config.pixKeyType + ")";
 $("demo").classList.toggle("on", isPlaceholder);
+
+if (config.image.trim()) {
+  $("campaignImageSrc").src = config.image;
+  $("campaignImageSrc").alt = config.imageAlt;
+  $("campaignImageSrc").hidden = false;
+  $("imagePlaceholder").hidden = true;
+}
 
 if (config.story.trim()) { $("story").textContent = config.story; $("storySection").hidden = false; }
 if (config.uses.length) {
