@@ -178,12 +178,12 @@ section.band.alt { background: #eef5f2; }
         <h1 id="title"></h1>
         <p class="lead" id="subtitle"></p>
         <figure class="campaign-image" id="campaignImage" aria-label="Imagem da campanha">
-          <div class="image-placeholder" id="imagePlaceholder">
+          <div class="image-placeholder" id="imagePlaceholder" hidden>
             <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="8.5" cy="9" r="1.7" fill="currentColor"/><path d="m4.5 18 4.8-4.8 3.2 3.1 2.1-2.2 4.9 4.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
             <strong>Imagem da campanha</strong>
             <span>Substitua este espaço por uma foto relacionada à causa.</span>
           </div>
-          <img id="campaignImageSrc" alt="" hidden />
+          <img id="campaignImageSrc" src="https://i.postimg.cc/tT9Vnb03/1765139353-561.jpg" alt="Imagem da campanha Fazer o Bem" loading="eager" decoding="async" referrerpolicy="no-referrer" />
         </figure>
       </div>
 
@@ -296,6 +296,12 @@ if (config.image.trim()) {
   $("campaignImageSrc").hidden = false;
   $("imagePlaceholder").hidden = true;
 }
+$("campaignImageSrc").addEventListener("error", () => {
+  $("campaignImageSrc").hidden = true;
+  $("imagePlaceholder").hidden = false;
+  $("imagePlaceholder").querySelector("strong").textContent = "Imagem indisponível";
+  $("imagePlaceholder").querySelector("span").textContent = "Verifique o endereço da imagem ou tente novamente mais tarde.";
+});
 
 if (config.story.trim()) { $("story").textContent = config.story; $("storySection").hidden = false; }
 if (config.uses.length) {
