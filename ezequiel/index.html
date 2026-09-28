@@ -3,9 +3,13 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0f4c45" />
 <meta name="description" content="Faça sua doação por PIX: copie a chave, confira o recebedor e conclua no app do seu banco." />
+<!-- Prévia ao compartilhar no WhatsApp/redes: ajuste estes textos para a sua campanha -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Ajude essa causa" />
+<meta property="og:description" content="Doe por PIX em menos de 1 minuto, direto para quem precisa." />
 <title>Ajude essa causa</title>
 <style>
 :root {
@@ -30,11 +34,20 @@ button { font: inherit; cursor: pointer; }
 .topbar .wrap { display: flex; align-items: center; gap: 10px; padding: 16px 0; font-weight: 700; }
 .topbar svg { width: 24px; height: 24px; color: var(--amber); }
 
-.hero { background: var(--pine); color: #fff; padding: 28px 0 56px; }
-.hero .wrap { display: grid; gap: 32px; align-items: start; }
-.hero h1 { margin: 0 0 14px; font-family: var(--serif); font-size: clamp(34px, 6vw, 56px); line-height: 1.08; letter-spacing: -0.8px; }
+.hero { background: var(--pine); color: #fff; padding: 4px 0 36px; }
+.hero .wrap { display: grid; gap: 20px; grid-template-areas: "intro" "panel" "trust"; }
+.intro { grid-area: intro; }
+.panel { grid-area: panel; }
+.trust { grid-area: trust; }
+.hero h1 { margin: 0 0 10px; font-family: var(--serif); font-size: clamp(30px, 8vw, 56px); line-height: 1.1; letter-spacing: -0.6px; text-wrap: balance; }
 .hero .lead { margin: 0; max-width: 520px; color: #d5e6e2; font-size: clamp(16px, 2.2vw, 19px); }
-.trust { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 24px 0 0; padding: 0; list-style: none; color: #e6f1ee; font-size: 14px; font-weight: 600; }
+.trust { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 0; padding: 0; list-style: none; color: #e6f1ee; font-size: 14px; font-weight: 600; }
+.panel-title { margin: 0 0 14px; font-family: var(--serif); font-size: 22px; line-height: 1.2; }
+.hint { margin: 12px 0 0; color: var(--muted); font-size: 13px; text-align: center; }
+
+.bar { position: fixed; inset: auto 0 0 0; z-index: 10; padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line); background: #fff; box-shadow: 0 -8px 24px rgb(0 0 0 / 12%); transform: translateY(100%); visibility: hidden; transition: transform .2s, visibility .2s; }
+.bar.show { transform: none; visibility: visible; }
+.bar .btn { min-height: 52px; }
 .trust li::before { content: "✓"; margin-right: 7px; color: var(--amber); }
 
 .panel { padding: 24px; border-radius: 16px; background: #fff; color: var(--ink); box-shadow: 0 18px 44px rgb(0 0 0 / 22%); }
@@ -53,18 +66,19 @@ button { font: inherit; cursor: pointer; }
 .btn-main.done { background: var(--pine-dark); }
 .btn-alt { min-height: 48px; margin-top: 10px; border: 1.5px solid var(--line); background: #fff; color: var(--pine); font-size: 14px; font-weight: 700; }
 .btn-alt:hover { background: var(--tint); }
-.status { min-height: 22px; margin: 8px 0 0; color: var(--action-hover); font-size: 13px; font-weight: 600; text-align: center; }
+.status:empty { display: none; }
+.status { margin: 10px 0 0; color: var(--action-hover); font-size: 13px; font-weight: 600; text-align: center; }
 .status[data-state="error"] { color: var(--err); }
 
-section.band { padding: 56px 0; }
+section.band { padding: 44px 0; }
 section.band.alt { background: var(--tint); }
 section[hidden] { display: none; }
 .band h2 { margin: 0 0 20px; font-family: var(--serif); font-size: clamp(26px, 4vw, 34px); line-height: 1.2; }
 .story { max-width: 680px; margin: 0; font-size: 18px; color: var(--body); white-space: pre-line; }
 
 .steps { display: grid; gap: 16px; margin: 0; padding: 0; list-style: none; counter-reset: s; }
-.steps li { counter-increment: s; padding: 22px; border: 1px solid var(--line); border-radius: 14px; background: #fff; color: var(--body); }
-.steps li::before { content: counter(s); display: grid; place-items: center; width: 32px; height: 32px; margin-bottom: 12px; border-radius: 50%; background: var(--pine); color: #fff; font-weight: 700; }
+.steps li { counter-increment: s; display: flex; gap: 14px; align-items: flex-start; padding: 16px 18px; border: 1px solid var(--line); border-radius: 14px; background: #fff; color: var(--body); font-size: 15px; }
+.steps li::before { content: counter(s); flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--pine); color: #fff; font-weight: 700; }
 .uses { display: grid; gap: 12px; max-width: 680px; margin: 0; padding: 0; list-style: none; }
 .uses li { position: relative; padding-left: 26px; font-size: 17px; color: var(--body); }
 .uses li::before { content: ""; position: absolute; left: 2px; top: 10px; width: 10px; height: 10px; border-radius: 50%; background: var(--amber); }
@@ -75,10 +89,19 @@ section[hidden] { display: none; }
 .safety { padding: 28px 0; background: var(--pine-dark); color: #cfe0dc; font-size: 14px; }
 .safety strong { color: #fff; }
 
+@media (max-width: 859px) {
+  .safety { padding-bottom: calc(28px + 76px + env(safe-area-inset-bottom, 0px)); }
+}
 @media (min-width: 860px) {
-  .hero { padding: 40px 0 72px; }
-  .hero .wrap { grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items: center; }
+  .bar { display: none; }
+  .hero { padding: 24px 0 80px; }
+  .hero .wrap { grid-template-columns: 1.15fr 0.85fr; grid-template-areas: "intro panel" "trust panel"; column-gap: 56px; row-gap: 24px; align-content: center; }
+  .intro { align-self: end; }
+  .trust { align-self: start; }
+  .panel { padding: 28px; }
   .steps { grid-template-columns: repeat(3, 1fr); }
+  .steps li { display: block; padding: 22px; font-size: 16px; }
+  .steps li::before { margin-bottom: 12px; }
   section.band { padding: 72px 0; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
@@ -97,17 +120,13 @@ section[hidden] { display: none; }
 <main>
   <section class="hero" aria-labelledby="title">
     <div class="wrap">
-      <div>
+      <div class="intro">
         <h1 id="title"></h1>
         <p class="lead" id="subtitle"></p>
-        <ul class="trust">
-          <li>Direto por PIX</li>
-          <li>Sem taxas</li>
-          <li>Recebedor identificado</li>
-        </ul>
       </div>
 
       <div class="panel" id="doar">
+        <h2 class="panel-title">Faça sua doação</h2>
         <div class="recipient">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m8.5 12 2.5 2.5 4.5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <div><small>A doação será enviada para</small><strong id="recipient"></strong></div>
@@ -122,8 +141,15 @@ section[hidden] { display: none; }
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="6" cy="12" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="18" cy="19" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m8.3 10.8 7.4-4.4M8.3 13.2l7.4 4.4" stroke="currentColor" stroke-width="1.8" fill="none"/></svg>
           <span>Compartilhar esta campanha</span>
         </button>
+        <p class="hint">Leva menos de 1 minuto. Você confere o nome do recebedor no app do banco antes de confirmar.</p>
         <p class="status" id="status" role="status" aria-live="polite" aria-atomic="true"></p>
       </div>
+
+      <ul class="trust">
+        <li>Direto por PIX</li>
+        <li>Sem taxas</li>
+        <li>Recebedor identificado</li>
+      </ul>
     </div>
   </section>
 
@@ -163,6 +189,13 @@ section[hidden] { display: none; }
 <footer class="safety">
   <div class="wrap"><strong>Doe com segurança.</strong> Antes de confirmar no app do banco, confira se o nome do recebedor é o mesmo mostrado nesta página. Nunca envie comprovantes ou dados pessoais a quem pedir por mensagem em nome da campanha.</div>
 </footer>
+
+<div class="bar" id="stickyBar">
+  <button class="btn btn-main" id="barCopy" type="button">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span id="barLabel">Copiar chave PIX</span>
+  </button>
+</div>
 
 <script>
 /* ===================== EDITE AQUI ===================== */
@@ -227,15 +260,26 @@ function say(msg, error) {
 }
 
 let timer;
-$("copy").addEventListener("click", async () => {
+function setLabels(text, done) {
+  $("copyLabel").textContent = text; $("barLabel").textContent = text;
+  $("copy").classList.toggle("done", done); $("barCopy").classList.toggle("done", done);
+}
+async function doCopy() {
   clearTimeout(timer);
   const ok = await copyText(config.pixKey);
-  $("copyLabel").textContent = ok ? "Chave copiada!" : "Copiar chave PIX";
-  $("copy").classList.toggle("done", ok);
-  say(ok ? "Agora abra o app do seu banco, cole a chave e confira o recebedor."
+  setLabels(ok ? "Chave copiada! Abra o app do banco" : "Copiar chave PIX", ok);
+  say(ok ? "Agora cole a chave no app do seu banco e confira o recebedor."
          : "Não foi possível copiar. Toque na chave para selecioná-la e copie manualmente.", !ok);
-  timer = setTimeout(() => { $("copyLabel").textContent = "Copiar chave PIX"; $("copy").classList.remove("done"); }, 2400);
-});
+  if (!ok) $("doar").scrollIntoView({ behavior: "smooth", block: "center" });
+  timer = setTimeout(() => setLabels("Copiar chave PIX", false), 3200);
+}
+$("copy").addEventListener("click", doCopy);
+$("barCopy").addEventListener("click", doCopy);
+
+// Barra fixa: aparece no celular só quando o painel de doação sai da tela
+if ("IntersectionObserver" in window) {
+  new IntersectionObserver(([e]) => $("stickyBar").classList.toggle("show", !e.isIntersecting)).observe($("doar"));
+}
 
 $("share").addEventListener("click", async () => {
   if (navigator.share) {
