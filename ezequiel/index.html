@@ -1,373 +1,235 @@
 <!doctype html>
-<!-- Arquivo único: CSS e JavaScript incorporados. -->
+<!-- Arquivo único: CSS e JavaScript incorporados. Edite apenas o bloco "config" no final. -->
 <html lang="pt-BR">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#f4f1ea" />
-    <meta name="description" content="Copie a chave PIX e conclua a doação no aplicativo do seu banco." />
-    <title>Ajude essa causa</title>
-    <style>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#0f4c45" />
+<meta name="description" content="Faça sua doação por PIX: copie a chave, confira o recebedor e conclua no app do seu banco." />
+<title>Ajude essa causa</title>
+<style>
 :root {
   color-scheme: light;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
+  --bg: #e8eeeb;
+  --pine: #0f4c45;
+  --pine-dark: #0a3732;
+  --action: #0c7a5e;
+  --action-hover: #0a664e;
+  --amber: #f2b544;
+  --ink: #16211f;
+  --muted: #5a6764;
+  --line: #dbe3e0;
+  --tint: #f2f6f4;
+  --warn-bg: #fff4d6;
+  --warn-ink: #5e4508;
+  --err: #9c3229;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  --canvas: #f4f1ea;
-  --header-red: #a83c32;
-  --green: #17824d;
-  --green-hover: #126a3f;
-  --ink: #252823;
-  --muted: #62665f;
 }
+* { box-sizing: border-box; }
+html, body { margin: 0; min-width: 320px; background: var(--bg); color: var(--ink); }
+body { min-height: 100svh; line-height: 1.55; }
+button { font: inherit; cursor: pointer; }
+.shell { display: grid; place-items: start center; padding: 28px 16px 40px; }
+.card { width: min(100%, 440px); overflow: hidden; border-radius: 18px; background: #fff; box-shadow: 0 20px 50px rgb(15 76 69 / 16%); }
 
-* {
-  box-sizing: border-box;
-}
+.hero { padding: 30px 26px 26px; background: var(--pine); color: #fff; }
+.hero svg { width: 34px; height: 34px; color: var(--amber); }
+.hero h1 { margin: 12px 0 8px; font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; font-size: 30px; font-weight: 700; line-height: 1.15; letter-spacing: -0.4px; }
+.hero p { margin: 0; color: #d5e6e2; font-size: 15px; }
 
-html {
-  min-width: 320px;
-  min-height: 100%;
-  background: var(--canvas);
-}
+.demo { display: none; margin: 0; padding: 10px 26px; background: var(--warn-bg); color: var(--warn-ink); font-size: 13px; font-weight: 600; }
+.demo.on { display: block; }
 
-body {
-  min-width: 320px;
-  min-height: 100vh;
-  min-height: 100svh;
-  margin: 0;
-  background: var(--canvas);
-  color: var(--ink);
-}
+.body { padding: 24px 26px 8px; }
+.story { margin: 0 0 22px; font-size: 15px; color: #2b3a37; }
+.story:empty { display: none; }
 
-button {
-  font: inherit;
-}
+.recipient { display: flex; gap: 12px; align-items: center; margin-bottom: 18px; padding: 12px 14px; border-radius: 12px; background: var(--tint); border: 1px solid var(--line); }
+.recipient svg { flex: none; width: 24px; height: 24px; color: var(--action); }
+.recipient small { display: block; color: var(--muted); font-size: 12px; }
+.recipient strong { font-size: 15px; overflow-wrap: anywhere; }
 
-.page-shell {
-  display: grid;
-  min-height: 100vh;
-  min-height: 100svh;
-  place-items: center;
-  padding: 24px 16px;
-}
+.key-label { margin: 0 0 6px; font-size: 13px; font-weight: 700; color: var(--pine); }
+.key { margin: 0 0 12px; padding: 14px; border: 2px dashed var(--action); border-radius: 12px; background: #f7fbf9; font: 700 15px/1.4 ui-monospace, "SFMono-Regular", Consolas, monospace; text-align: center; overflow-wrap: anywhere; user-select: all; }
 
-.donation-card {
-  width: min(100%, 370px);
-  overflow: hidden;
-  border: 1px solid rgb(52 43 34 / 7%);
-  border-radius: 20px;
-  background: #fff;
-  box-shadow: 0 18px 48px rgb(53 44 35 / 12%), 0 3px 10px rgb(53 44 35 / 5%);
-}
+.btn { display: flex; width: 100%; min-height: 56px; align-items: center; justify-content: center; gap: 10px; border: 0; border-radius: 12px; font-size: 16px; font-weight: 800; transition: background-color .15s, transform .1s; }
+.btn:active { transform: translateY(1px); }
+.btn:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+.btn svg { width: 20px; height: 20px; }
+.btn-main { background: var(--action); color: #fff; }
+.btn-main:hover { background: var(--action-hover); }
+.btn-main.done { background: var(--pine-dark); }
+.btn-alt { min-height: 48px; margin-top: 10px; background: #fff; color: var(--pine); border: 1.5px solid var(--line); font-size: 14px; font-weight: 700; }
+.btn-alt:hover { background: var(--tint); }
+.status { min-height: 22px; margin: 8px 0 0; color: var(--action-hover); font-size: 13px; font-weight: 600; text-align: center; }
+.status[data-state="error"] { color: var(--err); }
 
-.card-header {
-  padding: 25px 22px 22px;
-  background: var(--header-red);
-  color: #fff;
-  text-align: center;
-}
+.section { margin: 22px 0 0; padding-top: 20px; border-top: 1px solid var(--line); }
+.section h2 { margin: 0 0 12px; font-size: 16px; }
+.steps, .uses { margin: 0; padding: 0; list-style: none; }
+.steps li { display: flex; gap: 12px; margin-bottom: 10px; font-size: 14px; color: #2b3a37; }
+.steps li::before { content: counter(s); counter-increment: s; flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--pine); color: #fff; font-size: 13px; font-weight: 700; display: grid; place-items: center; }
+.steps { counter-reset: s; }
+.uses li { position: relative; margin-bottom: 8px; padding-left: 22px; font-size: 14px; color: #2b3a37; }
+.uses li::before { content: ""; position: absolute; left: 2px; top: 8px; width: 8px; height: 8px; border-radius: 50%; background: var(--amber); }
+.section[hidden] { display: none; }
 
-.heart {
-  display: grid;
-  width: 42px;
-  height: 42px;
-  place-items: center;
-  margin: 0 auto 10px;
-  color: #ffd15c;
-}
+.contacts { display: flex; flex-wrap: wrap; gap: 8px; }
+.contacts a { padding: 8px 14px; border: 1.5px solid var(--line); border-radius: 999px; color: var(--pine); font-size: 13px; font-weight: 700; text-decoration: none; }
+.contacts a:hover { background: var(--tint); }
+.contacts a:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
 
-.heart svg {
-  width: 40px;
-  height: 40px;
-}
-
-.card-header h1 {
-  margin: 0;
-  font-size: 24px;
-  font-weight: 760;
-  letter-spacing: -0.6px;
-  line-height: 1.2;
-}
-
-.card-header p {
-  max-width: 280px;
-  margin: 8px auto 0;
-  color: #fff;
-  font-size: 13px;
-  font-weight: 550;
-  line-height: 1.5;
-}
-
-.card-content {
-  padding: 22px 22px 20px;
-  text-align: center;
-}
-
-.field-heading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin-bottom: 9px;
-  color: #812f29;
-  font-size: 11px;
-  font-weight: 850;
-  letter-spacing: 0.65px;
-}
-
-.demo-badge {
-  padding: 3px 7px;
-  border-radius: 999px;
-  background: #fff2ce;
-  color: #684b0c;
-  font-size: 9px;
-  letter-spacing: 0.3px;
-}
-
-.demo-badge[hidden] {
-  display: none;
-}
-
-.pix-key {
-  display: grid;
-  min-height: 50px;
-  place-items: center;
-  margin: 0 0 13px;
-  padding: 11px 12px;
-  border: 1.5px dashed #bd695f;
-  border-radius: 11px;
-  background: #fcfaf8;
-  color: #252823;
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 1.5;
-  overflow-wrap: anywhere;
-  user-select: text;
-}
-
-.copy-button {
-  display: inline-flex;
-  width: 100%;
-  min-height: 54px;
-  align-items: center;
-  justify-content: center;
-  gap: 9px;
-  padding: 0 16px;
-  border: 0;
-  border-radius: 11px;
-  background: var(--green);
-  color: #fff;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 800;
-  transition: background-color 140ms ease, transform 140ms ease;
-}
-
-.copy-button:hover {
-  background: var(--green-hover);
-}
-
-.copy-button:active {
-  transform: translateY(1px);
-}
-
-.copy-button:focus-visible {
-  outline: 3px solid #302718;
-  outline-offset: 3px;
-  box-shadow: 0 0 0 5px #ffcf57;
-}
-
-.copy-button.is-copied {
-  background: #126b40;
-}
-
-.copy-icon {
-  width: 18px;
-  height: 18px;
-  flex: 0 0 auto;
-}
-
-.copy-status {
-  margin: 9px 0 0;
-  color: #176a40;
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 1.5;
-}
-
-.copy-status:empty {
-  display: none;
-}
-
-.copy-status[data-state="error"] {
-  color: #9c3229;
-}
-
-.recipient {
-  margin: 14px 0 0;
-  padding-top: 11px;
-  border-top: 1px solid #eeeae5;
-  color: var(--muted);
-  font-size: 11px;
-  line-height: 1.5;
-  overflow-wrap: anywhere;
-}
-
-.recipient strong {
-  color: #41443d;
-  font-weight: 750;
-}
+.safety { margin: 22px -26px 0; padding: 16px 26px 20px; background: var(--tint); color: var(--muted); font-size: 12.5px; }
+.safety strong { color: var(--ink); }
 
 @media (max-width: 380px) {
-  .donation-card {
-    border-radius: 17px;
-  }
-
-  .card-header {
-    padding: 23px 18px 20px;
-  }
-
-  .card-content {
-    padding: 20px 17px 18px;
-  }
-
-  .card-header h1 {
-    font-size: 22px;
-  }
+  .hero { padding: 26px 20px 22px; }
+  .hero h1 { font-size: 26px; }
+  .body { padding: 20px 20px 6px; }
+  .safety { margin-inline: -20px; padding-inline: 20px; }
 }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<main class="shell">
+  <article class="card" aria-labelledby="title">
+    <header class="hero">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 41 9.2 26.9C2.8 20.8 5.3 9.5 14.1 9.5c4.4 0 7.6 2.6 9.9 6.6 2.3-4 5.5-6.6 9.9-6.6 8.8 0 11.3 11.3 4.9 17.4L24 41Z" fill="currentColor"/></svg>
+      <h1 id="title"></h1>
+      <p id="subtitle"></p>
+    </header>
+    <p class="demo" id="demo" role="note">Modo demonstração: preencha os dados reais no bloco “config” antes de divulgar esta página.</p>
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
-    transition-duration: 0.01ms !important;
-  }
-}
+    <div class="body">
+      <p class="story" id="story"></p>
 
-    </style>
-  </head>
-  <body>
-    <main class="page-shell">
-      <section class="donation-card" aria-labelledby="page-title">
-        <header class="card-header">
-          <span class="heart" aria-hidden="true">
-            <svg viewBox="0 0 48 48"><path d="M24 41 9.2 26.9C2.8 20.8 5.3 9.5 14.1 9.5c4.4 0 7.6 2.6 9.9 6.6 2.3-4 5.5-6.6 9.9-6.6 8.8 0 11.3 11.3 4.9 17.4L24 41Z" fill="currentColor" /></svg>
-          </span>
-          <h1 id="page-title">Ajude essa causa</h1>
-          <p>Copie a chave e conclua a doação no app do seu banco.</p>
-        </header>
+      <div class="recipient">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m8.5 12 2.5 2.5 4.5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div><small>A doação será enviada para</small><strong id="recipient"></strong></div>
+      </div>
 
-        <div class="card-content">
-          <div class="field-heading">
-            <span id="pixKeyLabel">CHAVE PIX</span>
-            <span class="demo-badge" id="demoBadge">DEMONSTRAÇÃO</span>
-          </div>
+      <p class="key-label" id="keyLabel">Chave PIX</p>
+      <p class="key" id="key" aria-labelledby="keyLabel"></p>
 
-          <p class="pix-key" id="pixKey" aria-labelledby="pixKeyLabel">SUA-CHAVE-PIX-AQUI</p>
+      <button class="btn btn-main" id="copy" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span id="copyLabel">Copiar chave PIX</span>
+      </button>
+      <button class="btn btn-alt" id="share" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="6" cy="12" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="18" cy="19" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m8.3 10.8 7.4-4.4M8.3 13.2l7.4 4.4" stroke="currentColor" stroke-width="1.8" fill="none"/></svg>
+        <span id="shareLabel">Compartilhar esta campanha</span>
+      </button>
+      <p class="status" id="status" role="status" aria-live="polite" aria-atomic="true"></p>
 
-          <button class="copy-button" id="copyButton" type="button">
-            <svg class="copy-icon" viewBox="0 0 24 24" aria-hidden="true">
-              <rect x="8" y="8" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.9" />
-              <path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-            <span class="button-label">Copiar chave PIX</span>
-          </button>
-
-          <p class="copy-status" id="copyStatus" role="status" aria-live="polite" aria-atomic="true"></p>
-
-          <p class="recipient">Recebedor: <strong id="recipientName">NOME DO BENEFICIÁRIO (DEMONSTRAÇÃO)</strong></p>
-        </div>
+      <section class="section">
+        <h2>Como doar em 3 passos</h2>
+        <ol class="steps">
+          <li>Copie a chave PIX acima.</li>
+          <li>Abra o app do seu banco e escolha Pix &gt; Pagar com chave (ou “Pix copia e cola”).</li>
+          <li>Cole a chave, confira o nome do recebedor, informe o valor e confirme.</li>
+        </ol>
       </section>
-    </main>
-    <script>
-// Substitua a chave e o nome abaixo pelos dados reais antes de divulgar.
-const pixConfig = {
-  pixKey: "SUA-CHAVE-PIX-AQUI",
-  recipient: "NOME DO BENEFICIÁRIO (DEMONSTRAÇÃO)",
-  demoMode: true,
+
+      <section class="section" id="usesSection" hidden>
+        <h2 id="usesTitle">Para onde vai a sua doação</h2>
+        <ul class="uses" id="uses"></ul>
+      </section>
+
+      <section class="section" id="contactSection" hidden>
+        <h2>Fale com a gente</h2>
+        <div class="contacts" id="contacts"></div>
+      </section>
+
+      <div class="safety">
+        <strong>Doe com segurança.</strong> Antes de confirmar no app do banco, confira se o nome do recebedor é o mesmo mostrado acima. Nunca envie comprovantes ou dados pessoais a quem pedir por mensagem em nome da campanha.
+      </div>
+    </div>
+  </article>
+</main>
+
+<script>
+/* ===================== EDITE AQUI ===================== */
+const config = {
+  demoMode: true,                                   // mude para false quando tudo estiver preenchido
+  title: "Ajude essa causa",
+  subtitle: "Sua doação chega direto a quem precisa, por PIX, sem taxas.",
+  story: "",                                        // 2 a 4 frases: quem você é, o que aconteceu, o que será feito com o dinheiro
+  recipient: "NOME DO BENEFICIÁRIO (DEMONSTRAÇÃO)", // exatamente como aparece no app do banco
+  pixKey: "solidariedade.fazerobem@gmail.com",
+  pixKeyType: "e-mail",                             // e-mail, CPF, CNPJ, celular ou chave aleatória
+  usesTitle: "Para onde vai a sua doação",
+  uses: [],                                         // ex.: ["Cestas básicas para 40 famílias", "Transporte até o hospital"]
+  contacts: [],                                     // ex.: [{ label: "WhatsApp", href: "https://wa.me/55..." }]
 };
+/* ====================================================== */
 
-const pixKeyElement = document.querySelector("#pixKey");
-const recipientElement = document.querySelector("#recipientName");
-const demoBadge = document.querySelector("#demoBadge");
-const copyButton = document.querySelector("#copyButton");
-const buttonLabel = copyButton.querySelector(".button-label");
-const copyStatus = document.querySelector("#copyStatus");
-const defaultButtonLabel = "Copiar chave PIX";
-let resetTimer;
+const $ = (id) => document.getElementById(id);
+const isPlaceholder = config.demoMode || /DEMONSTRAÇÃO/i.test(config.recipient) || config.pixKey === "SUA-CHAVE-PIX-AQUI";
 
-pixKeyElement.textContent = pixConfig.pixKey;
-recipientElement.textContent = pixConfig.recipient;
+document.title = config.title;
+$("title").textContent = config.title;
+$("subtitle").textContent = config.subtitle;
+$("story").textContent = config.story;
+$("recipient").textContent = config.recipient;
+$("key").textContent = config.pixKey;
+$("keyLabel").textContent = "Chave PIX (" + config.pixKeyType + ")";
+$("demo").classList.toggle("on", isPlaceholder);
 
-const hasDemoValues =
-  pixConfig.pixKey === "SUA-CHAVE-PIX-AQUI" ||
-  pixConfig.recipient === "NOME DO BENEFICIÁRIO (DEMONSTRAÇÃO)";
-demoBadge.hidden = !(pixConfig.demoMode || hasDemoValues);
-
-function copyWithFallback(text) {
-  const input = document.createElement("textarea");
-  input.value = text;
-  input.setAttribute("readonly", "");
-  input.setAttribute("aria-hidden", "true");
-  input.style.position = "fixed";
-  input.style.left = "-9999px";
-  document.body.append(input);
-  input.select();
-
-  let copied = false;
-  try {
-    copied = document.execCommand("copy");
-  } catch {
-    copied = false;
-  }
-
-  input.remove();
-  return copied;
+if (config.uses.length) {
+  $("usesTitle").textContent = config.usesTitle;
+  config.uses.forEach((t) => { const li = document.createElement("li"); li.textContent = t; $("uses").append(li); });
+  $("usesSection").hidden = false;
 }
+config.contacts.filter((c) => /^(https:\/\/|mailto:|tel:)/.test(c.href)).forEach((c) => {
+  const a = document.createElement("a");
+  a.textContent = c.label; a.href = c.href; a.target = "_blank"; a.rel = "noopener noreferrer";
+  $("contacts").append(a);
+});
+if ($("contacts").children.length) $("contactSection").hidden = false;
 
-async function copyPixKey() {
-  window.clearTimeout(resetTimer);
-  copyStatus.textContent = "";
-  copyStatus.removeAttribute("data-state");
-
-  let copied = false;
+function legacyCopy(text) {
+  const t = document.createElement("textarea");
+  t.value = text; t.setAttribute("readonly", ""); t.style.cssText = "position:fixed;left:-9999px";
+  document.body.append(t); t.select();
+  let ok = false;
+  try { ok = document.execCommand("copy"); } catch { ok = false; }
+  t.remove();
+  return ok;
+}
+async function copyText(text) {
   if (navigator.clipboard?.writeText && window.isSecureContext) {
-    try {
-      await navigator.clipboard.writeText(pixConfig.pixKey);
-      copied = true;
-    } catch {
-      copied = copyWithFallback(pixConfig.pixKey);
-    }
-  } else {
-    copied = copyWithFallback(pixConfig.pixKey);
+    try { await navigator.clipboard.writeText(text); return true; } catch { /* usa alternativa */ }
   }
-
-  if (copied) {
-    buttonLabel.textContent = "Chave copiada!";
-    copyButton.classList.add("is-copied");
-    copyStatus.textContent = pixConfig.demoMode || hasDemoValues
-      ? "Chave demonstrativa copiada. Substitua os dados antes de divulgar."
-      : "Chave copiada. Cole no app do seu banco para concluir a doação.";
-  } else {
-    buttonLabel.textContent = defaultButtonLabel;
-    copyButton.classList.remove("is-copied");
-    copyStatus.dataset.state = "error";
-    copyStatus.textContent = "Não foi possível copiar. Selecione a chave e copie manualmente.";
-  }
-
-  resetTimer = window.setTimeout(() => {
-    buttonLabel.textContent = defaultButtonLabel;
-    copyButton.classList.remove("is-copied");
-  }, 2200);
+  return legacyCopy(text);
 }
 
-copyButton.addEventListener("click", copyPixKey);
+let timer;
+function say(msg, error) {
+  $("status").textContent = msg;
+  if (error) $("status").dataset.state = "error"; else $("status").removeAttribute("data-state");
+}
 
-    </script>
-  </body>
+$("copy").addEventListener("click", async () => {
+  clearTimeout(timer);
+  const ok = await copyText(config.pixKey);
+  $("copyLabel").textContent = ok ? "Chave copiada!" : "Copiar chave PIX";
+  $("copy").classList.toggle("done", ok);
+  say(ok ? "Agora abra o app do seu banco, cole a chave e confira o recebedor."
+         : "Não foi possível copiar. Toque na chave para selecioná-la e copie manualmente.", !ok);
+  timer = setTimeout(() => { $("copyLabel").textContent = "Copiar chave PIX"; $("copy").classList.remove("done"); }, 2400);
+});
+
+$("share").addEventListener("click", async () => {
+  const data = { title: config.title, text: config.title + " — doe por PIX:", url: location.href };
+  if (navigator.share) {
+    try { await navigator.share(data); } catch { /* cancelado pela pessoa */ }
+    return;
+  }
+  const ok = await copyText(location.href);
+  say(ok ? "Link da campanha copiado. Envie a quem puder ajudar." : "Não foi possível copiar o link.", !ok);
+});
+</script>
+</body>
 </html>
