@@ -250,7 +250,7 @@ section.band.alt { background: #eef5f2; }
 </main>
 
 <footer class="safety">
-  <div class="wrap"><strong>Doe com segurança.</strong> Antes de confirmar no app do banco, confira se o nome do recebedor é o mesmo mostrado nesta página. Nunca envie comprovantes ou dados pessoais a quem pedir por mensagem em nome da campanha.</div>
+  <div class="wrap"><strong>Doe com segurança.</strong> Todo o valor é destinado ao Ezequiel e sua esposa. Este é o único canal oficial de doações ao Ezequiel.</div>
 </footer>
 
 <div class="bar" id="stickyBar">
@@ -264,13 +264,13 @@ section.band.alt { background: #eef5f2; }
 /* ===================== EDITE AQUI ===================== */
 const config = {
   demoMode: false,                                  // dados reais preenchidos
-  brand: "Nome da campanha ou instituição",
+  brand: "Campanha do Bem",
   title: "Ajude essa causa",
   subtitle: "Sua doação chega direto a quem precisa, por PIX, sem taxas.",
   image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663988231809/nhmpUwjXWXBuyAnR.png", // imagem da campanha
   imageAlt: "Retrato de Ezequiel no pôr do sol",
   story: "",                                        // 2 a 4 frases: quem você é, o que aconteceu, o que será feito com o dinheiro
-  recipient: "Ezequiel",                         // exatamente como aparece no app do banco
+  recipient: "Ezequiel e Esposa",                         // exatamente como aparece no app do banco
   pixKey: "ajuda.fazerobem@gmail.com",
   pixKeyType: "e-mail",                             // e-mail, CPF, CNPJ, celular ou chave aleatória
   usesTitle: "Para onde vai a sua doação",
@@ -352,7 +352,7 @@ function setLabels(text, done) {
 async function doCopy() {
   clearTimeout(timer);
   const ok = await copyText(config.pixKey);
-  setLabels(ok ? "Chave copiada! Abra o app do banco" : "Copiar chave PIX", ok);
+  setLabels(ok ? "Pix Copiado! Contribua" : "Copiar chave PIX", ok);
   say(ok ? "Agora cole a chave no app do seu banco e confira o recebedor."
          : "Não foi possível copiar. Toque na chave para selecioná-la e copie manualmente.", !ok);
   if (!ok) $("doar").scrollIntoView({ behavior: "smooth", block: "center" });
